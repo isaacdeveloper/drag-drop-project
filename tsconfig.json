@@ -22,6 +22,7 @@
     "compileOnSave": false,
     "buildOnSave": false,
     "files": [
+        "src/index.ts",
         "typings/axios/axios.d.ts",
         "typings/bss-hw-api/bss-hw-api.d.ts",
         "typings/classnames/classnames.d.ts",

@@ -4,13 +4,14 @@ var ReactDOM = require('react-dom')
 var update = require('react/lib/update')
 const PropTypes = React.PropTypes
 import { findDOMNode } from 'react-dom'
-import { DragDropContext, DropTarget } from 'react-dnd'
+import { DragSource, DragDropContext, DropTarget } from 'react-dnd'
 var HTML5Backend = require('react-dnd-html5-backend')
+import DragSourceElement from './DragSourceElement'
 
 const boxTarget = {
   drop(props, monitor, component) {
     const item = monitor.getItem()
-    component.moveElement(item.element, item.forTarget)
+    component.moveElement(item.element, item.forTarget, item.id)
   }
 }
 
@@ -18,6 +19,11 @@ export interface DropTargetContainerProps {
   children?: any
   connectDropTarget?: any
   idTarget: string
+  style?: any
+  elements: any[]
+  onDrop: Function
+  onRemove: Function
+  reDrop?: boolean
 }
 
 @(DropTarget('element', boxTarget, connect => ({
@@ -30,68 +36,116 @@ export default class DropTargetContainer extends React.Component<DropTargetConta
   }
 
   state = {
-    movedElements: []
+    elementHover: -1
   }
 
   constructor(props) {
     super(props)
   }
 
-  moveElement(element, forTarget) {
+  moveElement(element, forTarget, idElement) {
     if(forTarget.indexOf(this.props.idTarget) == -1 ||
-        this.state.movedElements.indexOf(element) > -1){
-          console.log(this.state.movedElements.indexOf(element))
-      return false
+      this.getElement(idElement)){
+        return false
     }
-    this.setState(
-      update(this.state, {
-        movedElements: {
-          $push: [element]
-        }
-      })
-    )
+
+    if(this.props.onDrop){
+      this.props.onDrop(this.props.idTarget, element)
+    }
   }
 
   removeElement(i) {
-    this.setState(
-      update(this.state, {
-        movedElements: {
-          $splice: [
-            [i, 1]
-          ]
-        }
+    this.props.onRemove(this.props.idTarget, i)
+  }
+
+  getElement(id) {
+    let data = this.props.elements
+    if (data) {
+      let exist = false
+      let e = data.map((e, i) => {
+        exist = e.id == id ? e : exist
       })
-    )
+      return exist
+    }
+    return false
+  }
+
+  onMouseOver(i) {
+    this.setState({
+      elementHover: i
+    })
+  }
+
+  onMouseLeave() {
+    this.setState({
+      elementHover: -1
+    })
   }
 
   render() {
     let connectDropTarget = this.props.connectDropTarget
     const style = {
-      border: '1px dashed gray',
-      padding: '0.5rem 1rem',
-      marginBottom: '.5rem',
-      backgroundColor: 'white'
+      padding: '7px 7px 4px 4px',
+      display: 'table',
+      float: 'left',
+      position: 'relative'
     }
+
     const removeBtn = {
-      padding: 2,
-      float: 'right',
-      cursor: 'pointer',
-      fontSize: 12
+      padding: '3px 5px',
+      fontSize: 10,
+      border: '1px solid',
+      borderRadius: '50%',
+      backgroundColor: '#000000',
+      color: '#fff',
+      position: 'absolute',
+      right: -10,
+      top: 0
     }
+    let elements = this.props.elements ? this.props.elements : []
     return (
       <div>
       {
         connectDropTarget(
-          <div style={{minHeight: 200, border: '1px solid #999'}}>
+          <div style={this.props.style ? this.props.style : null}>
             {
-              this.state.movedElements.map((e, i) => {
-                return (
-                  <div style={style} key={i}>
-                    <div style={{display: 'inline-block'}}>{e}</div>
-                    <span style={removeBtn} onClick={this.removeElement.bind(this, i)}>X</span>
-                  </div>
-                )
-              })
+              elements.length > 0 ?
+                elements.map((e, i) => {
+                  return (
+                    <div key={i} style={{display: 'table', float: 'left'}}>
+                    {this.props.reDrop ?
+                        <DragSourceElement forTarget={[]}>
+                          <div
+                            style={style}
+                            onMouseOver={this.onMouseOver.bind(this, i)}
+                            onMouseLeave={this.onMouseLeave.bind(this)}>
+                            <div style={{display: 'inline-block'}}>{e}</div>
+                            {
+                              this.state.elementHover == i ?
+                                <span style={removeBtn} onClick={this.removeElement.bind(this, i)}>X</span>
+                              : null
+                            }
+                          </div>
+                        </DragSourceElement>
+                      :
+                      <div
+                        style={style}
+                        key={i}
+                        onMouseOver={this.onMouseOver.bind(this, i)}
+                        onMouseLeave={this.onMouseLeave.bind(this)}>
+                        <div style={{display: 'inline-block'}}>{e}</div>
+                        {
+                          this.state.elementHover == i ?
+                            <span style={removeBtn} onClick={this.removeElement.bind(this, i)}>X</span>
+                          : null
+                        }
+                      </div>
+                    }
+                    </div>
+                  )
+                })
+              :
+              (this.props.children ? this.props.children : null)
             }
           </div>
         )

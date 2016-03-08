@@ -6,9 +6,11 @@ import { DragSource, DropTarget } from 'react-dnd'
 
 const cardSource = {
   beginDrag(props, monitor, component) {
+    let e = Object.assign({}, props.children, {id: props.id})
     return {
-      element: props.children,
-      forTarget: props.forTarget
+      element: e,
+      forTarget: props.forTarget,
+      id: props.id
     }
   }
 }
@@ -18,6 +20,7 @@ export interface DragSourceElementProps {
   isDragging?: any
   connectDragSource?: any
   children?: any
+  id?: string
 }
 
 @(DragSource('element', cardSource, (connect, monitor) => ({
@@ -35,7 +38,8 @@ export default class DragSourceElement extends React.Component<DragSourceElement
       border: '1px dashed gray',
       padding: '0.5rem 1rem',
       marginBottom: '.5rem',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      display: 'table'
     }
     let isDragging = this.props.isDragging ? this.props.isDragging : false
     let connectDragSource = this.props.connectDragSource
