@@ -1,0 +1,6 @@
+{
+  "ambientDependencies": {
+    "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#945ebfe049964e429c2530971b9081f3c0f611df",
+    "react-dnd": "github:DefinitelyTyped/DefinitelyTyped/react-dnd/react-dnd.d.ts#55542c4c6ccb98f47e3b538c80b2934ff53b02b3"
+  }
+}

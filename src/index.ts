@@ -1,5 +1,5 @@
-/*import DragDropContextElement from './DragDropContext'
-import DropTargetContainer from './DropTargetContainer'
+import DragDropContext from './DragDropContext'
 import DragSourceElement from './DragSourceElement'
+import DropTargetContainer from './DropTargetContainer'
 
-export {DragDropContextElement, DropTargetContainer, DragSourceElement}*/
+module.exports = {DragDropContext, DragSourceElement, DropTargetContainer}

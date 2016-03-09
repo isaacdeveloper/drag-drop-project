@@ -1,10 +1,11 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
         "isolatedModules": false,
         "jsx": "react",
+        "outDir": "build",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "declaration": false,
@@ -14,42 +15,13 @@
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors": true
     },
-    "filesGlob": [
-        "**/*.ts",
-        "**/*.tsx",
-        "!node_modules/**"
+    "exclude": [
+        "node_modules",
+        "typings/browser.d.ts",
+        "typings/browser"
     ],
     "compileOnSave": false,
     "buildOnSave": false,
-    "files": [
-        "src/index.ts",
-        "typings/axios/axios.d.ts",
-        "typings/bss-hw-api/bss-hw-api.d.ts",
-        "typings/classnames/classnames.d.ts",
-        "typings/es6-shim/es6-shim.d.ts",
-        "typings/globals.d.ts",
-        "typings/moment/moment-node.d.ts",
-        "typings/moment/moment.d.ts",
-        "typings/react-dnd/react-dnd.d.ts",
-        "typings/react-motion/react-motion.d.ts",
-        "typings/react-redux/react-redux.d.ts",
-        "typings/react-router/history.d.ts",
-        "typings/react-router/react-router.d.ts",
-        "typings/react/react-addons.d.ts",
-        "typings/react/react-dom.d.ts",
-        "typings/react/react.d.ts",
-        "typings/redux-devtools/redux-devtools.d.ts",
-        "typings/redux-persist/redux-persist.d.ts",
-        "typings/redux-router/redux-router.d.ts",
-        "typings/redux-thunk/redux-thunk.d.ts",
-        "typings/redux/redux.d.ts",
-        "typings/tsd.d.ts",
-        "src/AppLayout.tsx",
-        "src/Components/DragDropContext.tsx",
-        "src/Components/DragSourceElement.tsx",
-        "src/Components/DropTargetContainer.tsx",
-        "src/Components/Inicial.tsx"
-    ],
     "atom": {
         "rewriteTsconfig": true
     }
