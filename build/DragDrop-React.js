@@ -316,7 +316,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                fontSize: 10,
 	                border: '1px solid',
 	                borderRadius: '50%',
-	                backgroundColor: '#000',
+	                background: 'transparent',
 	                color: '#fff',
 	                position: 'absolute',
 	                right: -10,
