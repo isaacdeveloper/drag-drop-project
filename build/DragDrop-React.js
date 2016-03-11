@@ -317,7 +317,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                border: '1px solid',
 	                borderRadius: '50%',
 	                background: 'transparent',
-	                color: '#fff',
+	                color: '#000',
 	                position: 'absolute',
 	                right: -10,
 	                top: 0
