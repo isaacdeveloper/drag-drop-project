@@ -312,7 +312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                position: 'relative'
 	            };
 	            var removeBtn = {
-	                padding: '3px 5px',
+	                padding: '3px 3px',
 	                fontSize: 10,
 	                border: '1px solid',
 	                borderRadius: '50%',
