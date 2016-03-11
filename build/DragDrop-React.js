@@ -123,7 +123,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            var isDragging = this.props.isDragging ? this.props.isDragging : false;
 	            var connectDragSource = this.props.connectDragSource;
 	            var opacity = isDragging ? 0 : 1;
-	            return connectDragSource(React.createElement("div", { style: Object.assign({}, style, { opacity: opacity }) }, this.props.children));
+	            return connectDragSource(React.createElement("div", { style: Object.assign({}, style, { opacity: opacity }, this.props.style) }, this.props.children));
 	        }
 	    }]);
 

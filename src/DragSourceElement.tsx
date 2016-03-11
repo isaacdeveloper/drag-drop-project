@@ -18,6 +18,7 @@ export interface DragSourceElementProps {
   connectDragSource?: any
   children?: any
   id?: string
+  style?: any
 }
 
 @(DragSource('element', cardSource, (connect, monitor) => ({
@@ -43,7 +44,7 @@ export default class DragSourceElement extends React.Component<DragSourceElement
     let opacity = isDragging ? 0 : 1
 
     return connectDragSource(
-      <div style={Object.assign({}, style, {opacity})}>
+      <div style={Object.assign({}, style, {opacity}, this.props.style)}>
         {this.props.children}
       </div>
     )
