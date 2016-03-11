@@ -1,6 +1,6 @@
 {
   "name": "drag-drop-react",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "",
   "main": "./build/DragDrop-React.min.js",
   "scripts": {

@@ -84,7 +84,7 @@ export default class DropTargetContainer extends React.Component<DropTargetConta
     const removeBtn = {
       padding: '3px 3px',
       fontSize: 10,
-      border: '1px solid',
+      border: '0px solid',
       borderRadius: '50%',
       background: 'transparent',
       color: '#000',
